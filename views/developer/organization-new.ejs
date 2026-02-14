@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Organization | Developer Portal</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/developer.css">
+</head>
+<body>
+    <div class="create-page">
+        <div class="create-container">
+            <a href="/developer" class="back-link">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to Dashboard
+            </a>
+            
+            <div class="create-header">
+                <h1>Create Organization</h1>
+                <p>Set up a new workspace for your applications</p>
+            </div>
+            
+            <div class="create-card">
+                <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+                    <div class="error-list">
+                        <ul>
+                            <% errors.forEach(error => { %>
+                                <li><%= error.msg %></li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                <% } %>
+                
+                <form action="/developer/organizations" method="POST">
+                    <div class="form-group">
+                        <label for="name">Organization Name *</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            value="<%= typeof values !== 'undefined' ? values.name || '' : '' %>"
+                            placeholder="My Company"
+                            required
+                            autofocus
+                        >
+                        <small>This name will be displayed to your users</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea 
+                            id="description" 
+                            name="description"
+                            placeholder="Brief description of your organization..."
+                        ><%= typeof values !== 'undefined' ? values.description || '' : '' %></textarea>
+                        <small>Optional description for your reference</small>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <a href="/developer" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Create Organization</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

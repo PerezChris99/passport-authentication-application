@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/auth-pages.css">
+</head>
+<body>
+    <div class="magic-page">
+        <div class="magic-container">
+            <div class="magic-card">
+                <div class="magic-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+                
+                <h1>Sign in with Email</h1>
+                <p>Enter your email and we'll send you a magic link to sign in.</p>
+                
+                <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+                    <div class="error-list">
+                        <ul>
+                            <% errors.forEach(error => { %>
+                                <li><%= error.msg %></li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                <% } %>
+                
+                <form action="/auth/magic/request" method="POST">
+                    <% if (typeof clientId !== 'undefined' && clientId) { %>
+                        <input type="hidden" name="clientId" value="<%= clientId %>">
+                    <% } %>
+                    <% if (typeof redirectUrl !== 'undefined' && redirectUrl) { %>
+                        <input type="hidden" name="redirectUrl" value="<%= redirectUrl %>">
+                    <% } %>
+                    
+                    <div class="magic-form-group">
+                        <label for="email">Email address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            value="<%= typeof email !== 'undefined' ? email : '' %>"
+                            placeholder="you@example.com"
+                            required
+                            autofocus
+                        >
+                    </div>
+                    
+                    <button type="submit" class="magic-btn">Send Magic Link</button>
+                </form>
+                
+                <div class="divider"><span>or</span></div>
+                
+                <a href="/login" class="alt-link">Sign in with password</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

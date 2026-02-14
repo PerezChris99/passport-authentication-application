@@ -1,0 +1,597 @@
+/**
+ * OAuth & Magic Link Authentication Styles
+ * Auth-as-a-Service Platform - Auth Pages
+ */
+
+/* ============================================
+   Base Page Layouts
+   ============================================ */
+.auth-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 420px;
+}
+
+.auth-container.narrow {
+    max-width: 400px;
+}
+
+/* ============================================
+   OAuth Consent Page
+   ============================================ */
+.consent-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.consent-container {
+    width: 100%;
+    max-width: 420px;
+}
+
+.consent-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.consent-header {
+    padding: 32px;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.consent-header h1 {
+    font-size: 20px;
+    color: #1e1b4b;
+    margin: 0 0 8px 0;
+}
+
+.consent-header p {
+    color: #64748b;
+    margin: 0;
+    font-size: 14px;
+}
+
+.consent-body {
+    padding: 24px 32px;
+}
+
+.consent-body-text {
+    color: #374151;
+    font-size: 14px;
+    margin: 0 0 16px 0;
+}
+
+.consent-footer {
+    padding: 24px 32px;
+    background: #f8fafc;
+    display: flex;
+    gap: 12px;
+}
+
+/* ============================================
+   App Icon
+   ============================================ */
+.app-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
+
+.app-icon svg {
+    width: 32px;
+    height: 32px;
+    color: white;
+}
+
+.app-icon img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* ============================================
+   User Info Badge
+   ============================================ */
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    background: #4f46e5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.user-info span {
+    font-size: 14px;
+    color: #374151;
+}
+
+/* ============================================
+   Scope List
+   ============================================ */
+.scope-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.scope-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.scope-item:last-child {
+    border-bottom: none;
+}
+
+.scope-icon {
+    width: 32px;
+    height: 32px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.scope-icon svg {
+    width: 16px;
+    height: 16px;
+    color: #64748b;
+}
+
+.scope-info h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1e1b4b;
+    margin: 0 0 2px 0;
+}
+
+.scope-info p {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0;
+}
+
+/* ============================================
+   OAuth Buttons
+   ============================================ */
+.btn-deny {
+    flex: 1;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    transition: all 0.2s;
+    background: white;
+    color: #dc2626;
+    border: 2px solid #fee2e2;
+}
+
+.btn-deny:hover {
+    background: #fee2e2;
+}
+
+.btn-allow {
+    flex: 1;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    transition: all 0.2s;
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+    color: white;
+}
+
+.btn-allow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+}
+
+/* ============================================
+   Trust Footer
+   ============================================ */
+.trust-info {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.trust-info a {
+    color: #4f46e5;
+}
+
+/* ============================================
+   OAuth Error Page
+   ============================================ */
+.error-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.error-container {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+.error-icon {
+    width: 80px;
+    height: 80px;
+    background: #fee2e2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+}
+
+.error-icon svg {
+    width: 40px;
+    height: 40px;
+    color: #dc2626;
+}
+
+.error-container h1 {
+    font-size: 24px;
+    color: #1e1b4b;
+    margin: 0 0 8px 0;
+}
+
+.error-code {
+    font-family: monospace;
+    font-size: 14px;
+    color: #dc2626;
+    background: #fee2e2;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 16px;
+}
+
+.error-description {
+    color: #64748b;
+    margin: 0 0 24px 0;
+    line-height: 1.6;
+}
+
+/* ============================================
+   Magic Link Pages
+   ============================================ */
+.magic-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.magic-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.magic-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    padding: 40px 32px;
+    text-align: center;
+}
+
+.magic-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+}
+
+.magic-icon svg {
+    width: 32px;
+    height: 32px;
+    color: white;
+}
+
+.magic-icon.success {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.magic-icon.error {
+    width: 80px;
+    height: 80px;
+    background: #fee2e2;
+    border-radius: 50%;
+}
+
+.magic-icon.error svg {
+    width: 40px;
+    height: 40px;
+    color: #dc2626;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.9; }
+}
+
+.magic-card h1 {
+    font-size: 24px;
+    color: #1e1b4b;
+    margin: 0 0 8px 0;
+}
+
+.magic-card p {
+    color: #64748b;
+    margin: 0 0 24px 0;
+    line-height: 1.6;
+}
+
+.email-highlight {
+    font-weight: 600;
+    color: #374151;
+}
+
+/* ============================================
+   Magic Link Tips Box
+   ============================================ */
+.tips {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.tips h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    margin: 0 0 12px 0;
+}
+
+.tips ul {
+    margin: 0;
+    padding-left: 20px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.tips li {
+    margin-bottom: 6px;
+}
+
+.tips li:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================================
+   Suggestion Box
+   ============================================ */
+.suggestion {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 16px;
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+/* ============================================
+   Magic Link Form Styles
+   ============================================ */
+.magic-form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.magic-form-group label {
+    display: block;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.magic-form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.2s;
+}
+
+.magic-form-group input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+.magic-btn {
+    width: 100%;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.magic-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+}
+
+.magic-btn-link {
+    display: inline-block;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.magic-btn-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+    color: white;
+}
+
+/* ============================================
+   Divider
+   ============================================ */
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 24px 0;
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e2e8f0;
+}
+
+.divider span {
+    padding: 0 16px;
+}
+
+/* ============================================
+   Alternative Link
+   ============================================ */
+.alt-link {
+    color: #4f46e5;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.alt-link:hover {
+    text-decoration: underline;
+}
+
+.alt-link.muted {
+    color: #64748b;
+}
+
+.alt-link.muted:hover {
+    color: #4f46e5;
+}
+
+/* ============================================
+   Error List
+   ============================================ */
+.error-list {
+    background: #fee2e2;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.error-list ul {
+    margin: 0;
+    padding-left: 20px;
+    color: #dc2626;
+    font-size: 14px;
+}
+
+/* ============================================
+   Generic Button
+   ============================================ */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #4f46e5;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    background: #4338ca;
+    color: white;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 480px) {
+    .consent-header,
+    .consent-body,
+    .consent-footer {
+        padding: 20px;
+    }
+    
+    .magic-card {
+        padding: 32px 24px;
+    }
+}

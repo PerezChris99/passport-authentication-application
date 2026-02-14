@@ -123,6 +123,11 @@ app.use('/users', require('./routes/users'));
 app.use('/api', require('./routes/api/index'));
 app.use('/admin', require('./routes/admin'));
 
+// Auth-as-a-Service Routes
+app.use('/developer', require('./routes/developer'));
+app.use('/oauth', require('./routes/oauth'));
+app.use('/auth/magic', require('./routes/magic'));
+
 // CSRF error handler
 app.use((err, req, res, next) => {
   if (err.code === 'EBADCSRFTOKEN') {

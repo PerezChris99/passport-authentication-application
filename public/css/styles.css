@@ -2199,3 +2199,28 @@ a:hover {
     box-shadow: none;
   }
 }
+
+/* ============================================
+   Component Utility Classes
+   ============================================ */
+.hero-icon {
+  font-size: 12rem;
+  opacity: 0.3;
+}
+
+.profile-icon {
+  font-size: 3rem;
+}
+
+.password-strength-bar {
+  height: 5px;
+}
+
+.password-strength-bar .progress-bar {
+  width: 0%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.qr-code-img {
+  max-width: 200px;
+}

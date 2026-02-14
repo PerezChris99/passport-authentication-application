@@ -4,37 +4,67 @@ const bcrypt = require('bcryptjs');
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   email: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   password: {
     type: String,
     required: true
   },
-  firstName: {
-    type: String
+  
+  // Profile information
+  profile: {
+    firstName: String,
+    lastName: String,
+    avatar: String,
+    phone: String,
+    timezone: String
   },
-  lastName: {
-    type: String
+  
+  // Legacy fields for backwards compatibility
+  firstName: String,
+  lastName: String,
+  
+  // Multi-tenancy support
+  organization: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Organization',
+    index: true
   },
+  
+  // Custom metadata (like Clerk/Auth0)
+  metadata: {
+    type: mongoose.Schema.Types.Mixed,
+    default: {}
+  },
+  
+  // Role and permissions
   role: {
     type: String,
     enum: ['user', 'admin'],
     default: 'user'
   },
+  
+  // Account status
   isVerified: {
     type: Boolean,
     default: false
   },
+  isBlocked: {
+    type: Boolean,
+    default: false
+  },
+  
+  // Verification tokens
   verificationToken: String,
   verificationTokenExpires: Date,
   resetPasswordToken: String,
   resetPasswordExpires: Date,
+  
+  // Security
   failedLoginAttempts: {
     type: Number,
     default: 0
@@ -44,16 +74,50 @@ const UserSchema = new mongoose.Schema({
     default: false
   },
   accountLockedUntil: Date,
+  
+  // Two-factor authentication
   twoFactorEnabled: {
     type: Boolean,
     default: false
   },
   twoFactorSecret: String,
+  
+  // OAuth connections
+  oauth: {
+    google: {
+      id: String,
+      email: String,
+      accessToken: String,
+      refreshToken: String
+    },
+    github: {
+      id: String,
+      username: String,
+      accessToken: String
+    },
+    facebook: {
+      id: String,
+      email: String,
+      accessToken: String
+    }
+  },
+  
+  // Activity tracking
+  lastLogin: Date,
+  lastPasswordChange: Date,
+  
+  // Timestamps
   date: {
     type: Date,
     default: Date.now
   }
+}, {
+  timestamps: true
 });
+
+// Compound indexes for multi-tenancy
+UserSchema.index({ email: 1, organization: 1 }, { unique: true, sparse: true });
+UserSchema.index({ username: 1, organization: 1 });
 
 // Hash password before saving
 UserSchema.pre('save', async function(next) {

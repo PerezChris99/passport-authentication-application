@@ -13,6 +13,7 @@
   "license": "ISC",
   "description": "Production-ready Passport Authentication Application with OAuth, 2FA, and JWT support",
   "dependencies": {
+    "axios": "^1.6.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "compression": "^1.7.4",

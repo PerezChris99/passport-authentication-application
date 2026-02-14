@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> | Developer Portal</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/developer.css">
+</head>
+<body>
+    <div class="dev-layout">
+        <aside class="dev-sidebar">
+            <div class="dev-sidebar-logo">
+                <h1>AuthService</h1>
+                <span>Developer Portal</span>
+            </div>
+            
+            <nav class="dev-nav">
+                <div class="dev-nav-section">
+                    <div class="dev-nav-section-title">Overview</div>
+                    <a href="/developer" class="dev-nav-link active">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        Dashboard
+                    </a>
+                </div>
+                
+                <div class="dev-nav-section">
+                    <div class="dev-nav-section-title">Organizations</div>
+                    <% if (typeof organizations !== 'undefined') { %>
+                        <% organizations.forEach(org => { %>
+                            <a href="/developer/<%= org.slug %>" class="dev-nav-link">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                                </svg>
+                                <%= org.name %>
+                            </a>
+                        <% }) %>
+                    <% } %>
+                    <a href="/developer/organizations/new" class="dev-nav-link">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        New Organization
+                    </a>
+                </div>
+                
+                <div class="dev-nav-section">
+                    <div class="dev-nav-section-title">Resources</div>
+                    <a href="/docs" class="dev-nav-link">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        Documentation
+                    </a>
+                    <a href="/dashboard" class="dev-nav-link">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12"/>
+                        </svg>
+                        Back to App
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <main class="dev-content">
+            <% if (typeof success_msg !== 'undefined' && success_msg) { %>
+                <div class="alert alert-success">
+                    <%= success_msg %>
+                </div>
+            <% } %>
+            
+            <% if (typeof error_msg !== 'undefined' && error_msg) { %>
+                <div class="alert alert-error">
+                    <%= error_msg %>
+                </div>
+            <% } %>
+            
+            <div class="dev-header">
+                <h1>Developer Dashboard</h1>
+                <a href="/developer/organizations/new" class="btn-primary">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    New Organization
+                </a>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Organizations</h3>
+                    <div class="value"><%= typeof organizations !== 'undefined' ? organizations.length : 0 %></div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Applications</h3>
+                    <div class="value">-</div>
+                </div>
+                <div class="stat-card">
+                    <h3>API Calls (30d)</h3>
+                    <div class="value">-</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Users</h3>
+                    <div class="value">-</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Your Organizations</h2>
+                </div>
+                <div class="card-body card-body-flush">
+                    <% if (typeof organizations !== 'undefined' && organizations.length > 0) { %>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Organization</th>
+                                    <th>Plan</th>
+                                    <th>Role</th>
+                                    <th>Created</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% organizations.forEach(org => { %>
+                                    <tr>
+                                        <td>
+                                            <strong><%= org.name %></strong>
+                                            <br>
+                                            <span class="table-slug"><%= org.slug %></span>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-info"><%= org.plan || 'Free' %></span>
+                                        </td>
+                                        <td>
+                                            <% const userMember = org.members.find(m => m.user.toString() === user._id.toString()); %>
+                                            <%= userMember ? userMember.role : 'member' %>
+                                        </td>
+                                        <td><%= org.createdAt.toLocaleDateString() %></td>
+                                        <td>
+                                            <a href="/developer/<%= org.slug %>" class="btn-secondary btn-sm">Manage</a>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    <% } else { %>
+                        <div class="empty-state">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            </svg>
+                            <h3>No organizations yet</h3>
+                            <p>Create your first organization to start building with our auth APIs.</p>
+                            <a href="/developer/organizations/new" class="btn-primary">
+                                Create Organization
+                            </a>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Quick Start</h2>
+                </div>
+                <div class="card-body">
+                    <div class="quick-start-grid">
+                        <div class="quick-start-item">
+                            <h3>1. Create an Organization</h3>
+                            <p>Organizations contain your applications, users, and API keys.</p>
+                        </div>
+                        <div class="quick-start-item">
+                            <h3>2. Register an Application</h3>
+                            <p>Get your Client ID and Secret to integrate OAuth.</p>
+                        </div>
+                        <div class="quick-start-item">
+                            <h3>3. Generate API Keys</h3>
+                            <p>Create API keys for server-to-server authentication.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

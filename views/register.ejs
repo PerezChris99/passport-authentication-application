@@ -57,8 +57,8 @@
                   <i class="bi bi-eye"></i>
                 </button>
               </div>
-              <div id="passwordStrength" class="progress mt-2" style="height: 5px;">
-                <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+              <div id="passwordStrength" class="progress mt-2 password-strength-bar">
+                <div class="progress-bar" role="progressbar"></div>
               </div>
               <div class="form-text">Min 8 chars with uppercase, lowercase, number, and special character.</div>
             </div>
@@ -96,34 +96,5 @@
     </div>
   </div>
 </div>
-
-<script>
-document.getElementById('togglePassword').addEventListener('click', function() {
-  const password = document.getElementById('password');
-  const icon = this.querySelector('i');
-  password.type = password.type === 'password' ? 'text' : 'password';
-  icon.classList.toggle('bi-eye');
-  icon.classList.toggle('bi-eye-slash');
-});
-
-document.getElementById('password').addEventListener('input', function() {
-  const password = this.value;
-  const progressBar = document.querySelector('#passwordStrength .progress-bar');
-  let strength = 0;
-  if (password.length >= 8) strength += 25;
-  if (/[a-z]/.test(password)) strength += 25;
-  if (/[A-Z]/.test(password)) strength += 25;
-  if (/[0-9]/.test(password) && /[@$!%*?&]/.test(password)) strength += 25;
-  progressBar.style.width = strength + '%';
-  progressBar.className = 'progress-bar ' + (strength <= 25 ? 'bg-danger' : strength <= 50 ? 'bg-warning' : strength <= 75 ? 'bg-info' : 'bg-success');
-});
-
-document.getElementById('confirmPassword').addEventListener('input', function() {
-  const match = this.value === document.getElementById('password').value;
-  document.getElementById('passwordMatch').innerHTML = this.value ? 
-    (match ? '<span class="text-success"><i class="bi bi-check"></i> Passwords match</span>' : 
-             '<span class="text-danger"><i class="bi bi-x"></i> Passwords do not match</span>') : '';
-});
-</script>
 
 <%- include('partials/footer') %>
