@@ -8,14 +8,16 @@
     "test": "jest --coverage",
     "lint": "eslint ."
   },
-  "keywords": ["authentication", "passport", "nodejs", "express", "oauth"],
+  "keywords": ["authentication", "passport", "nodejs", "express", "oauth", "webauthn", "passkeys", "auth-as-a-service"],
   "author": "",
   "license": "ISC",
-  "description": "Production-ready Passport Authentication Application with OAuth, 2FA, and JWT support",
+  "description": "Production-ready Auth-as-a-Service platform with OAuth 2.0, OIDC, Passkeys/WebAuthn, Magic Links, and 2FA support",
   "dependencies": {
     "axios": "^1.6.2",
+    "base64url": "^3.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
+    "cbor": "^9.0.1",
     "compression": "^1.7.4",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^5.1.0",

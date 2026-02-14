@@ -1,0 +1,207 @@
+<%- include('../partials/header') %>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <div class="passkey-icon mb-3">
+              <i class="bi bi-fingerprint"></i>
+            </div>
+            <h2 class="fw-bold">Register Passkey</h2>
+            <p class="text-muted">Add a passkey for faster, more secure sign-ins</p>
+          </div>
+
+          <%- include('../partials/messages') %>
+
+          <div id="passkey-support-check" class="alert alert-danger d-none">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            <strong>Not Supported</strong>
+            <p class="mb-0 mt-1">Your browser doesn't support passkeys. Please use a modern browser like Chrome, Safari, Firefox, or Edge.</p>
+          </div>
+
+          <div id="registration-form">
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Passkey Type</label>
+              <div class="d-flex gap-3">
+                <div class="form-check form-check-card flex-fill">
+                  <input class="form-check-input" type="radio" name="authenticatorType" id="platform" value="platform" checked>
+                  <label class="form-check-label" for="platform">
+                    <div class="d-flex align-items-center">
+                      <i class="bi bi-laptop fs-4 me-3 text-primary"></i>
+                      <div>
+                        <strong>This Device</strong>
+                        <small class="d-block text-muted">Face ID, Touch ID, Windows Hello</small>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+                <div class="form-check form-check-card flex-fill">
+                  <input class="form-check-input" type="radio" name="authenticatorType" id="cross-platform" value="cross-platform">
+                  <label class="form-check-label" for="cross-platform">
+                    <div class="d-flex align-items-center">
+                      <i class="bi bi-key fs-4 me-3 text-primary"></i>
+                      <div>
+                        <strong>Security Key</strong>
+                        <small class="d-block text-muted">YubiKey, USB key</small>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="passkeyName" class="form-label fw-semibold">Passkey Name (Optional)</label>
+              <input type="text" class="form-control" id="passkeyName" placeholder="e.g., MacBook Pro, Office Computer">
+              <small class="text-muted">Give your passkey a friendly name to identify it later</small>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button type="button" id="register-btn" class="btn btn-primary btn-lg">
+                <i class="bi bi-plus-circle me-2"></i>Register Passkey
+              </button>
+              <a href="/settings" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+          </div>
+
+          <div id="registration-progress" class="text-center d-none">
+            <div class="spinner-border text-primary mb-3" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mb-0">Waiting for authentication...</p>
+            <small class="text-muted">Complete the authentication on your device</small>
+          </div>
+
+          <div id="registration-success" class="text-center d-none">
+            <div class="success-icon mb-3">
+              <i class="bi bi-check-circle-fill text-success"></i>
+            </div>
+            <h4>Passkey Registered!</h4>
+            <p class="text-muted">You can now use this passkey to sign in.</p>
+            <div class="d-grid gap-2">
+              <a href="/webauthn/credentials/page" class="btn btn-primary">Manage Passkeys</a>
+              <a href="/settings" class="btn btn-outline-secondary">Back to Settings</a>
+            </div>
+          </div>
+
+          <div id="registration-error" class="text-center d-none">
+            <div class="error-icon mb-3">
+              <i class="bi bi-x-circle-fill text-danger"></i>
+            </div>
+            <h4>Registration Failed</h4>
+            <p class="text-muted" id="error-message">An error occurred during registration.</p>
+            <button type="button" class="btn btn-primary" onclick="resetForm()">Try Again</button>
+          </div>
+
+          <hr class="my-4">
+
+          <div class="passkey-info">
+            <h6 class="fw-semibold mb-3">About Passkeys</h6>
+            <ul class="small text-muted mb-0">
+              <li class="mb-2">Passkeys are a more secure alternative to passwords</li>
+              <li class="mb-2">They use your device's biometrics (Face ID, Touch ID) or PIN</li>
+              <li class="mb-2">Passkeys can sync across your devices via iCloud or Google</li>
+              <li>They're resistant to phishing attacks</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.passkey-icon {
+  font-size: 4rem;
+  color: var(--bs-primary);
+}
+.passkey-icon i {
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+.form-check-card {
+  position: relative;
+}
+.form-check-card .form-check-input {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+.form-check-card .form-check-label {
+  display: block;
+  padding: 1rem;
+  border: 2px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.form-check-card .form-check-input:checked + .form-check-label {
+  border-color: var(--bs-primary);
+  background: rgba(var(--bs-primary-rgb), 0.05);
+}
+.success-icon, .error-icon {
+  font-size: 4rem;
+}
+</style>
+
+<script src="/js/webauthn.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Check WebAuthn support
+  if (!isWebAuthnSupported()) {
+    document.getElementById('passkey-support-check').classList.remove('d-none');
+    document.getElementById('registration-form').classList.add('d-none');
+    return;
+  }
+
+  const registerBtn = document.getElementById('register-btn');
+  
+  registerBtn.addEventListener('click', async function() {
+    const authenticatorType = document.querySelector('input[name="authenticatorType"]:checked')?.value;
+    const name = document.getElementById('passkeyName').value.trim();
+    
+    showProgress();
+    
+    try {
+      const result = await registerPasskey(authenticatorType, name);
+      
+      if (result.success) {
+        showSuccess();
+      } else {
+        showError(result.message);
+      }
+    } catch (error) {
+      showError(error.message || 'Registration failed');
+    }
+  });
+});
+
+function showProgress() {
+  document.getElementById('registration-form').classList.add('d-none');
+  document.getElementById('registration-progress').classList.remove('d-none');
+}
+
+function showSuccess() {
+  document.getElementById('registration-progress').classList.add('d-none');
+  document.getElementById('registration-success').classList.remove('d-none');
+}
+
+function showError(message) {
+  document.getElementById('registration-progress').classList.add('d-none');
+  document.getElementById('error-message').textContent = message;
+  document.getElementById('registration-error').classList.remove('d-none');
+}
+
+function resetForm() {
+  document.getElementById('registration-error').classList.add('d-none');
+  document.getElementById('registration-form').classList.remove('d-none');
+}
+</script>
+
+<%- include('../partials/footer') %>

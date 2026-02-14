@@ -127,6 +127,7 @@ app.use('/admin', require('./routes/admin'));
 app.use('/developer', require('./routes/developer'));
 app.use('/oauth', require('./routes/oauth'));
 app.use('/auth/magic', require('./routes/magic'));
+app.use('/webauthn', require('./routes/webauthn'));
 
 // CSRF error handler
 app.use((err, req, res, next) => {
