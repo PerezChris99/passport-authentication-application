@@ -1,0 +1,51 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <i class="bi bi-shield-plus display-4 text-success"></i>
+            <h2 class="mt-2">Set Up Two-Factor Authentication</h2>
+            <p class="text-muted">Scan the QR code with your authenticator app.</p>
+          </div>
+          
+          <%- include('partials/messages') %>
+          
+          <div class="text-center mb-4">
+            <img src="<%= qrCodeUrl %>" alt="QR Code" class="img-fluid border rounded p-2" style="max-width: 200px;">
+          </div>
+          
+          <div class="alert alert-info">
+            <strong>Can't scan?</strong> Enter this code manually:<br>
+            <code class="user-select-all"><%= secret %></code>
+          </div>
+          
+          <form action="/auth/2fa/enable" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            
+            <div class="mb-4">
+              <label for="token" class="form-label">Verification Code</label>
+              <input type="text" class="form-control form-control-lg text-center" 
+                     id="token" name="token" 
+                     pattern="[0-9]{6}" maxlength="6" 
+                     placeholder="000000" required>
+              <div class="form-text">Enter the 6-digit code from your authenticator app to confirm setup.</div>
+            </div>
+            
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-success">
+                <i class="bi bi-check-circle"></i> Enable 2FA
+              </button>
+              <a href="/users/profile" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

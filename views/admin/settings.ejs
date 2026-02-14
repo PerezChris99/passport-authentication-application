@@ -1,0 +1,98 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<div class="container-fluid py-4">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-lg-2 mb-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-3">
+          <h6 class="text-muted text-uppercase small mb-3">Admin Menu</h6>
+          <nav class="nav flex-column">
+            <a class="nav-link" href="/admin"><i class="bi bi-speedometer2"></i> Dashboard</a>
+            <a class="nav-link" href="/admin/users"><i class="bi bi-people"></i> Users</a>
+            <a class="nav-link" href="/admin/audit-logs"><i class="bi bi-journal-text"></i> Audit Logs</a>
+            <a class="nav-link active" href="/admin/settings"><i class="bi bi-gear"></i> Settings</a>
+            <hr>
+            <a class="nav-link text-muted" href="/dashboard"><i class="bi bi-arrow-left"></i> Back to App</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="col-lg-10">
+      <%- include('../partials/messages') %>
+      
+      <h2 class="mb-4"><i class="bi bi-gear"></i> System Settings</h2>
+      
+      <div class="alert alert-info">
+        <i class="bi bi-info-circle"></i>
+        System settings are primarily configured through environment variables. 
+        See the <code>.env.example</code> file for available configuration options.
+      </div>
+      
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white">
+          <h5 class="mb-0">Current Configuration</h5>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td class="text-muted">Environment</td>
+                <td><code><%= process.env.NODE_ENV || 'development' %></code></td>
+              </tr>
+              <tr>
+                <td class="text-muted">Port</td>
+                <td><code><%= process.env.PORT || 3000 %></code></td>
+              </tr>
+              <tr>
+                <td class="text-muted">Rate Limit (Window)</td>
+                <td><code><%= process.env.RATE_LIMIT_WINDOW_MS || '900000' %>ms</code></td>
+              </tr>
+              <tr>
+                <td class="text-muted">Rate Limit (Max Requests)</td>
+                <td><code><%= process.env.RATE_LIMIT_MAX_REQUESTS || '100' %></code></td>
+              </tr>
+              <tr>
+                <td class="text-muted">Account Lockout Threshold</td>
+                <td><code><%= process.env.ACCOUNT_LOCKOUT_THRESHOLD || '5' %> attempts</code></td>
+              </tr>
+              <tr>
+                <td class="text-muted">Account Lockout Duration</td>
+                <td><code><%= process.env.ACCOUNT_LOCKOUT_DURATION_MINUTES || '30' %> minutes</code></td>
+              </tr>
+              <tr>
+                <td class="text-muted">Google OAuth</td>
+                <td>
+                  <span class="badge bg-<%= process.env.GOOGLE_CLIENT_ID ? 'success' : 'secondary' %>">
+                    <%= process.env.GOOGLE_CLIENT_ID ? 'Configured' : 'Not Configured' %>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">Facebook OAuth</td>
+                <td>
+                  <span class="badge bg-<%= process.env.FACEBOOK_APP_ID ? 'success' : 'secondary' %>">
+                    <%= process.env.FACEBOOK_APP_ID ? 'Configured' : 'Not Configured' %>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">GitHub OAuth</td>
+                <td>
+                  <span class="badge bg-<%= process.env.GITHUB_CLIENT_ID ? 'success' : 'secondary' %>">
+                    <%= process.env.GITHUB_CLIENT_ID ? 'Configured' : 'Not Configured' %>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

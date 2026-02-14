@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="container py-4">
+  <%- include('partials/messages') %>
+  
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-display"></i> Active Sessions</h2>
+    <a href="/users/settings" class="btn btn-outline-secondary btn-sm">
+      <i class="bi bi-arrow-left"></i> Back to Settings
+    </a>
+  </div>
+  
+  <div class="card border-0 shadow-sm">
+    <div class="card-header bg-white">
+      <h6 class="mb-0">Current Session</h6>
+    </div>
+    <div class="card-body">
+      <div class="d-flex align-items-start">
+        <div class="bg-success bg-opacity-10 rounded p-3 me-3">
+          <i class="bi bi-display text-success fs-4"></i>
+        </div>
+        <div class="flex-grow-1">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h6 class="mb-1">
+                This Device
+                <span class="badge bg-success ms-2">Current</span>
+              </h6>
+              <p class="text-muted small mb-1">
+                <i class="bi bi-globe"></i> IP: <%= currentSession.ip %>
+              </p>
+              <p class="text-muted small mb-0">
+                <i class="bi bi-browser-chrome"></i> <%= currentSession.userAgent %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="alert alert-info mt-4">
+    <i class="bi bi-info-circle"></i>
+    <strong>Note:</strong> To sign out of all other sessions, change your password. This will invalidate all existing sessions except your current one.
+  </div>
+</div>
+
+<%- include('partials/footer') %>

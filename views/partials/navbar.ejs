@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <i class="bi bi-shield-lock"></i> PassportAuth
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <% if (typeof user !== 'undefined' && user) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/dashboard">Dashboard</a>
+          </li>
+          <% if (user.role === 'admin') { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin">Admin</a>
+            </li>
+          <% } %>
+        <% } %>
+      </ul>
+      <ul class="navbar-nav">
+        <% if (typeof user !== 'undefined' && user) { %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+              <i class="bi bi-person-circle"></i> <%= user.username %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="/users/profile"><i class="bi bi-person"></i> Profile</a></li>
+              <li><a class="dropdown-item" href="/users/settings"><i class="bi bi-gear"></i> Settings</a></li>
+              <li><a class="dropdown-item" href="/users/activity"><i class="bi bi-activity"></i> Activity</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <form action="/auth/logout" method="POST" class="d-inline">
+                  <input type="hidden" name="_csrf" value="<%= typeof csrfToken !== 'undefined' ? csrfToken : '' %>">
+                  <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+        <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/register">Register</a>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>

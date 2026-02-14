@@ -1,0 +1,66 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="hero-section">
+  <div class="container">
+    <div class="row align-items-center min-vh-75">
+      <div class="col-lg-6">
+        <h1 class="display-4 fw-bold mb-4">Secure Authentication Made Simple</h1>
+        <p class="lead mb-4">
+          A production-ready authentication system with multi-factor authentication, 
+          OAuth integration, and enterprise-grade security features.
+        </p>
+        <div class="d-flex gap-3">
+          <a href="/auth/register" class="btn btn-primary btn-lg">Get Started</a>
+          <a href="/auth/login" class="btn btn-outline-secondary btn-lg">Sign In</a>
+        </div>
+      </div>
+      <div class="col-lg-6 text-center">
+        <i class="bi bi-shield-lock-fill display-1 text-primary" style="font-size: 12rem; opacity: 0.3;"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-5">Security Features</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="bi bi-shield-check display-4 text-primary mb-3"></i>
+            <h5 class="card-title">Multi-Factor Auth</h5>
+            <p class="card-text">Protect your account with TOTP-based two-factor authentication or email verification codes.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="bi bi-globe display-4 text-success mb-3"></i>
+            <h5 class="card-title">OAuth Integration</h5>
+            <p class="card-text">Sign in with Google, Facebook, or GitHub for a seamless authentication experience.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="bi bi-lock-fill display-4 text-danger mb-3"></i>
+            <h5 class="card-title">Account Protection</h5>
+            <p class="card-text">Rate limiting, account lockout, and audit logging keep your account secure.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="py-4 bg-dark text-light">
+  <div class="container text-center">
+    <p class="mb-0">&copy; <%= new Date().getFullYear() %> PassportAuth. All rights reserved.</p>
+  </div>
+</footer>
+
+<%- include('partials/footer') %>
